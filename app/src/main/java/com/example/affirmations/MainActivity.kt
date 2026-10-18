@@ -9,10 +9,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BlurOn
 import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -52,6 +49,7 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // 1. Картинка темы 68dp, скруглены только левые углы
             Image(
                 painter = painterResource(topic.imageRes),
                 contentDescription = stringResource(topic.name),
@@ -66,25 +64,32 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
                 contentScale = ContentScale.Crop
             )
 
+            // 2. Текстовая часть
             Column(
                 modifier = Modifier
                     .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp)
             ) {
+                // Название (bodyMedium)
                 Text(
                     text = stringResource(topic.name),
                     style = MaterialTheme.typography.bodyMedium
                 )
-                // Отступ 8dp (Рис. 5.15)
+
+                // Отступ 8dp
                 Spacer(modifier = Modifier.height(8.dp))
+
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    // Иконка 16dp (Рис. 5.15)
-                    Icon(
-                        imageVector = Icons.Default.BlurOn,
+                    // 3. ТВОЯ КАРТИНКА-ИКОНКА (18dp)
+                    Image(
+                        painter = painterResource(id = R.drawable.dots_icon), // имя твоего файла
                         contentDescription = null,
-                        modifier = Modifier.size(20.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        modifier = Modifier.size(18.dp)
                     )
+
+                    // Отступ 8dp
                     Spacer(modifier = Modifier.width(8.dp))
+
+                    // 4. Число (labelMedium)
                     Text(
                         text = topic.availableCourses.toString(),
                         style = MaterialTheme.typography.labelMedium
